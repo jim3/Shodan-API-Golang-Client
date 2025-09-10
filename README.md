@@ -6,7 +6,7 @@ An exercise in order to learn more about using the Shodan API (making calls, par
 ## Installation & Usage
 ```bash
 git clone https://github.com/jim3/Shodan-API-Golang-Client.git
-cd network-protocol-analyzer
+cd Shodan-API-Golang-Client
 go run . -iplookup "8.8.8.8" # Host information
 go run . -search "product:Apache" # Shodan search example
 ```
