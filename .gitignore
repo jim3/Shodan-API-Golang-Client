@@ -1,0 +1,10 @@
+# Ignore the folder `junkfiles` and all its contents
+/junkfiles/
+# Ignore all files with .log extension
+*.log
+# Ignore all files with .tmp extension
+*.tmp
+# Ignore all files with .bak extension
+*.bak
+# Ignore my personal notes file called notepad.md
+notepad.md

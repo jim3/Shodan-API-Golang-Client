@@ -10,6 +10,7 @@ func main() {
 	// Command line flags
 	ip := flag.String("iplookup", "", "IP address to look up")
 	query := flag.String("search", "", "Host search query")
+	// TODO: Add more flags as needed
 	flag.Parse()
 
 	// Return host information `/shodan/host/{ip}`
@@ -41,6 +42,5 @@ func main() {
 				break
 			}
 		}
-
 	}
 }
