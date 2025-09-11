@@ -15,7 +15,6 @@ go run . -search "product:Apache" # Shodan search example
 - A Shodan account and API key.
 - Go installed on your machine. [https://golang.org/dl/](https://golang.org/dl/).
 - Set your Shodan API key as an environment variable inside of your `.bashrc` or `.zshrc` file.
-- 
 ```bash
  export SHODAN_API_KEY="MY_API_KEY"
 ```
