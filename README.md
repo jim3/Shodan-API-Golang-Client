@@ -1,7 +1,4 @@
-# Shodan API Golang Client
-
-## Description
-An exercise in order to learn more about using the Shodan API (making calls, parsing JSON responses, etc.), Golang structs & methods, the `flag` package for command-line arguments, and parsing JSON using Go.
+An exercise in order to learn more about Go, the Shodan API and it's CVEDB, using the `flag` package to create a simple CLI application, and have fun.
 
 ## Installation & Usage
 ```bash
@@ -13,7 +10,7 @@ go run . -search "product:Apache" # Shodan search example
 
 ### Pre-requisites
 - A Shodan account and API key.
-- Go installed on your machine. [https://golang.org/dl/](https://golang.org/dl/).
+- Go installed on your machine. [https://golang.org/dl](https://golang.org/dl)
 - Set your Shodan API key as an environment variable inside of your `.bashrc` or `.zshrc` file.
 ```bash
  export SHODAN_API_KEY="MY_API_KEY"
