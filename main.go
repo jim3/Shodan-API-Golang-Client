@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"strings"
 )
 
 func main() {
@@ -13,18 +14,19 @@ func main() {
 	// TODO: Add more flags as needed
 	flag.Parse()
 
-	// Return host information `/shodan/host/{ip}`
+	// Return host information using the `-iplookup` flag
 	if *ip != "" {
-		var resp Response
-		result, err := resp.LookupIP(*ip)
+		// instance of the response
+		var resp HostInfo
+
+		err := resp.LookupIP(*ip)
 		if err != nil {
 			log.Fatalf("IP lookup failed: %v", err)
 		}
-
-		// Print Banner Information
-		for _, item := range result.Data {
-			fmt.Printf("Port: %d, Transport: %s, Location: %s\n", item.Port, item.Transport, item.Location.City)
-		}
+		// Print out basic host info in a pretty table-like format
+		fmt.Printf("%-15s %-20s %-20s\n", "IP", "City", "Ports")
+		fmt.Printf("%-15s %-20s %-20s\n",
+			resp.IP, resp.City, strings.Trim(strings.Join(strings.Fields(fmt.Sprint(resp.Ports)), ", "), "[]"))
 	}
 
 	// Return query results `shodan/host/search`

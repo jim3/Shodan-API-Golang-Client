@@ -4,57 +4,59 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 )
 
-// --------------------------------------------------------
-
-type Response struct {
-	IP           string     `json:"ip_str"`
-	Country      string     `json:"country_code"`
-	Organization string     `json:"org"`
-	Tags         []string   `json:"tags"`
-	Domains      []string   `json:"domains"`
-	Data         []DataItem `json:"data"` // Array of DataItem objects
+type HostInfo struct {
+	IP           string        `json:"ip_str"`
+	Ports        []int         `json:"ports"`
+	CountryName  string        `json:"country_name"`
+	City         string        `json:"city"`
+	Region       string        `json:"region_code"`
+	Domains      []string      `json:"domains"`
+	HostNames    []string      `json:"hostnames"`
+	Organization string        `json:"org"`
+	ISP          string        `json:"isp"`
+	LastUpdated  string        `json:"last_update"`
+	Tags         []string      `json:"tags"`
+	Data         []HostDetails `json:"data"` // specific service information
 }
 
 // Host information endpoint `/shodan/host/{ip}`
-func (r *Response) LookupIP(ipAddr string) (Response, error) {
+func (r *HostInfo) LookupIP(ipAddr string) error {
 	APIKEY := os.Getenv("SHODAN_API_KEY")
 	if APIKEY == "" {
-		return Response{}, fmt.Errorf("APIKEY environment variable not set")
+		return fmt.Errorf("APIKEY environment variable not set")
 	}
 
 	URL := fmt.Sprintf("https://api.shodan.io/shodan/host/%s?key=%s", ipAddr, APIKEY)
 	res, err := http.Get(URL)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer res.Body.Close()
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return Response{}, fmt.Errorf("error reading response body: %v", err)
+		return fmt.Errorf("error reading HostInfo body: %v", err)
 	}
 
-	err = json.Unmarshal(body, &r)
+	err = json.Unmarshal(body, r)
 	if err != nil {
-		return Response{}, fmt.Errorf("error unmarshalling json data: %v", err)
+		return fmt.Errorf("error unmarshalling json data: %v", err)
 	}
-
-	return *r, nil
+	return nil
 }
 
-type DataItem struct {
+type HostDetails struct {
 	IP        int64    `json:"ip"`
-	Port      int      `json:"port"`
-	Transport string   `json:"transport"`
+	Port      int      `json:"port"`      // Port number
+	Transport string   `json:"transport"` // Transport protocol (e.g., "tcp", "udp")
 	Hash      int64    `json:"hash"`
 	Tags      []string `json:"tags"`
 	Cloud     Cloud    `json:"cloud"`
-	Location  Location `json:"location"`
+	Location  Location `json:"location"` // Location
 }
 
 type Cloud struct {
@@ -64,7 +66,7 @@ type Cloud struct {
 }
 
 type Location struct {
-	City        string  `json:"city"`
+	City        string  `json:"city"` // Location.City
 	RegionCode  string  `json:"region_code"`
 	AreaCode    *string `json:"area_code"`
 	Longitude   float64 `json:"longitude"`
@@ -100,7 +102,7 @@ func (s *Search) HostSearch(q string) (Search, error) {
 
 	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		return Search{}, fmt.Errorf("error reading response body: %v", err)
+		return Search{}, fmt.Errorf("error reading HostInfo body: %v", err)
 	}
 
 	var result Search
