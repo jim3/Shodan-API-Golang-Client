@@ -1,4 +1,4 @@
-An exercise in order to learn more about Go, the Shodan API and it's CVEDB, using the `flag` package to create a simple CLI application, and have fun.
+An exercise in order to learn more about Go, the Shodan API and it's CVEDB, using the `flag` package to create a simple CLI application, and have fun. 😸
 
 ### Installation & Usage
 ```bash
