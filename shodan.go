@@ -110,6 +110,5 @@ func (s *Search) HostSearch(q string) (Search, error) {
 	if err != nil {
 		return Search{}, fmt.Errorf("error unmarshalling json data: %v", err)
 	}
-
 	return result, nil
 }

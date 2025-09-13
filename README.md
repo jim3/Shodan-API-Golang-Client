@@ -18,7 +18,7 @@ go run . -search "product:Apache" # Shodan search example
 ```
 
 ### Flags
-- `-iplookup` : Lookup host information via an IP address.
+- `-iplookup` : Returns all services found on a given host IP.
 - `-search` : A query string to search the database of banners in Shodan.
 
 ### Example Output:
