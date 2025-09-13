@@ -1,6 +1,6 @@
 An exercise in order to learn more about Go, the Shodan API and it's CVEDB, using the `flag` package to create a simple CLI application, and have fun.
 
-## Installation & Usage
+### Installation & Usage
 ```bash
 git clone https://github.com/jim3/Shodan-API-Golang-Client.git
 cd Shodan-API-Golang-Client
@@ -19,7 +19,7 @@ go run . -search "product:Apache" # Shodan search example
 
 ### Flags
 - `-iplookup` : Lookup information about a specific IP address.
-- `-search` : Search Shodan for a specific query.
+- `-search` : A query string to search the database of banners in Shodan.
 - `-cve` : Lookup information about a specific CVE.
 
 ### Example Output:
