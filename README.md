@@ -18,9 +18,8 @@ go run . -search "product:Apache" # Shodan search example
 ```
 
 ### Flags
-- `-iplookup` : Lookup information about a specific IP address.
+- `-iplookup` : Lookup host information via an IP address.
 - `-search` : A query string to search the database of banners in Shodan.
-- `-cve` : Lookup information about a specific CVE.
 
 ### Example Output:
 ```bash
